@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ICML 2025 Countdown</title>
+  <style>
+    /* Reset styles */
+    body {
+      margin: 0;
+      font-family: "Inter", sans-serif;
+      background-color: #e2c5ae; /* Soft pastel color */
+      background-image: url('https://i.pinimg.com/originals/c2/d9/85/c2d985d766faa8cc4bd9dbb6a8db657d.gif'); /* Subtle anime-style image */
+      background-size: cover;
+      font-family: "Roboto Mono", monospace; /* Robotic font */
+
+      background-position: center;
+      background-repeat: no-repeat;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      text-align: center;
+    }
+
+    /* Main container */
+    .countdown-container {
+      background: rgba(26, 22, 22, 0.9); /* Semi-transparent white */
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+      border-radius: 16px;
+      padding: 40px;
+      width: 350px;
+      backdrop-filter: blur(5px);
+    }
+
+    h1 {
+      font-size: 1.8rem;
+      color: #ff6b6b;
+      margin-bottom: 1rem;
+    }
+
+    .subtitle {
+      font-size: 1.1rem;
+      color: #f5cfcfdc;
+      margin-bottom: 20px;
+    }
+
+    .countdown-item {
+      margin: 15px 0;
+      color: #a71717dc;
+    }
+
+    .countdown-item span {
+      font-weight: bold;
+      color: #eb2525;
+    }
+
+    .countdown {
+      font-size: 1.5rem;
+      color: #4a95e0;
+      margin-top: 5px;
+    }
+
+    .footer {
+      margin-top: 20px;
+      font-size: 0.9rem;
+      color: #888;
+    }
+
+    .heart {
+      color: #ff6b6b;
+    }
+  </style>
+</head>
+<body>
+  <div class="countdown-container">
+    <h1>🌟 ICML 2025 Countdown 🌟</h1>
+    <p class="subtitle">Deadline with coffee</p>
+
+    <div class="countdown-item">
+      <p>📄 Paper Submissions Open on OpenReview:</p>
+      <p class="countdown" id="submissions-open">Jan 09, 2025, 08:59 AM KST</p>
+    </div>
+
+    <div class="countdown-item">
+      <p>📝 Abstract Submission Deadline:</p>
+      <p class="countdown" id="abstract-countdown">Calculating...</p>
+    </div>
+
+    <div class="countdown-item">
+      <p>📚 Full Paper Submission Deadline:</p>
+      <p class="countdown" id="full-paper-countdown">Calculating...</p>
+    </div>
+
+    <div class="footer">
+      Made with <span class="heart">❤</span> for your research journey.
+    </div>
+  </div>
+
+  <script>
+    // Set deadlines in Seoul time zone (KST)
+    const abstractDeadline = new Date("2025-01-23T23:59:59+09:00");
+    const fullPaperDeadline = new Date("2025-01-31T11:59:59+09:00");
+
+    // Countdown calculation function
+    function updateCountdowns() {
+      const now = new Date();
+
+      // Function to calculate time left
+      function calculateTimeLeft(targetDate) {
+        const timeLeft = targetDate - now;
+        const weeks = Math.floor(timeLeft / (1000 * 60 * 60 * 24 * 7));
+        const days = Math.floor((timeLeft % (1000 * 60 * 60 * 24 * 7)) / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+
+        return `${weeks} weeks ${days} days ${hours}h ${minutes}m ${seconds}s`;
+      }
+
+      // Update abstract countdown
+      document.getElementById("abstract-countdown").textContent = calculateTimeLeft(abstractDeadline);
+
+      // Update full paper countdown
+      document.getElementById("full-paper-countdown").textContent = calculateTimeLeft(fullPaperDeadline);
+
+      // Re-run every second
+      setTimeout(updateCountdowns, 1000);
+    }
+
+    // Start countdowns
+    updateCountdowns();
+  </script>
+</body>
+</html>
